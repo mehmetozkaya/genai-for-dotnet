@@ -1,0 +1,63 @@
+@inject WebApp.ApiClients.CatalogApiClient CatalogApiClient
+
+<div class="chat-box @(isExpanded ? "expanded" : "")">
+    <div class="chat-header" @onclick="ToggleChatBox">
+        Sales Support
+    </div>
+    @if (isExpanded)
+    {
+        <div class="chat-body">
+            <div class="messages">
+                @foreach (var message in messages)
+                {
+                    <div class="message @message.Author">@message.Text</div>
+                }
+            </div>
+            <div class="input-area">
+                <input @bind="currentMessage" @onkeyup="HandleInput" placeholder="Ask a question..." />
+                <button @onclick="SendMessage">Send</button>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private bool isExpanded = false;
+    private string currentMessage = "";
+    private List<ChatMessage> messages = new();
+
+    protected override void OnInitialized()
+    {
+        messages.Add(new ChatMessage("agent", "Welcome to sales support! How can I help you?"));
+    }
+
+    private void ToggleChatBox()
+    {
+        isExpanded = !isExpanded;
+    }
+
+    private async Task SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(currentMessage))
+        {
+            messages.Add(new ChatMessage("user", currentMessage));
+            var userMessage = currentMessage;
+            currentMessage = "";
+            StateHasChanged();
+
+            var response = await CatalogApiClient.SupportAgent(userMessage);
+            messages.Add(new ChatMessage("agent", response!));
+            StateHasChanged();
+        }
+    }
+
+    private async Task HandleInput(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await SendMessage();
+        }
+    }
+
+    private record ChatMessage(string Author, string Text);
+}
