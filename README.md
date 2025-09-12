@@ -7,6 +7,8 @@
 
 Welcome! This repository contains the complete source code for my comprehensive Udemy course, **"GenAI for .NET: Build LLM Apps with OpenAI and Ollama"**. This course is a practical, hands-on journey designed to take you from a curious .NET developer to a confident .NET AI developer, capable of building the next generation of intelligent software.
 
+### ✨ [➡️ Click Here to Enroll in the Full Course on Udemy!](https://www.udemy.com/course/genai-for-net-build-llm-apps-with-openai-and-ollama/?couponCode=LAUNCH_NETAI) ✨
+
 ---
 
 ## 🎓 About The Course
@@ -16,8 +18,6 @@ This is not a theory course. We will be in the code, building a wide range of so
 Develop AI-Powered Distributed Architectures using .NET Aspire and GenAI to develop EShop Catalog and Basket microservices integrate with Backing services including PostgreSQL, Redis, RabbitMQ, Keycloak, Ollama and Semantic Kernel to Create Intelligent E-Shop Solutions.
 
 A key philosophy of this course is **flexibility**. You'll learn how to build applications using Microsoft's new `Microsoft.Extensions.AI` abstractions, allowing you to seamlessly switch between best-in-class cloud models from **OpenAI** (via GitHub Models) and powerful, private, and free-to-run local models with **Ollama**.
-
-### ✨ [➡️ Click Here to Enroll in the Full Course on Udemy!](https://www.udemy.com/course/genai-for-net-build-llm-apps-with-openai-and-ollama/?couponCode=LAUNCH_NETAI) ✨
 
 ---
 
