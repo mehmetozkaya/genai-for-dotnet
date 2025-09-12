@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Udemy Course](https://img.shields.io/badge/Enroll%20on-Udemy-blue)](https://www.udemy.com/course/genai-for-net-build-llm-apps-with-openai-and-ollama/?couponCode=LAUNCH_NETAI)
 
-![big_picture](https://github.com/user-attachments/assets/7933c4ac-ae45-4a89-907e-0c0545a5fbfd)
+<img width="1371" height="489" alt="Image" src="https://github.com/user-attachments/assets/54360bbb-c541-4f2f-93f0-e87948a3c12e" />
 
 Welcome! This repository contains the complete source code for my comprehensive Udemy course, **"GenAI for .NET: Build LLM Apps with OpenAI and Ollama"**. This course is a practical, hands-on journey designed to take you from a curious .NET developer to a confident .NET AI developer, capable of building the next generation of intelligent software.
 
