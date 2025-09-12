@@ -94,22 +94,22 @@ dotnet user-secrets set "GitHubModels:Token" "YOUR_GITHUB_PAT_HERE"
 Configuration is handled by the .AppHost project. Navigate to the EShopVectorSearch.AppHost directory and set the secret there:
 ```bash
 dotnet user-secrets init
-dotnet user-secrets set "ConnectionStrings:openai" "Endpoint=[https://models.inference.ai.azure.com](https://models.inference.ai.azure.com);Key=YOUR_GITHUB_PAT_HERE"
+dotnet user-secrets set "ConnectionStrings:openai" "Endpoint=https://models.inference.ai.azure.com;Key=YOUR_GITHUB_PAT_HERE"
 ```
 
 ---
 
-## ⭐ About the Instructor
+### ⭐ About the Instructor
 Hi, I'm Mehmet Ozkaya, a software architect passionate about designing and building modern distributed systems with .NET. My focus is on bridging the gap between cutting-edge Generative AI technology and the practical needs of enterprise software development.
 
 ---
 
-## 🤝 Contributing & Feedback
+### 🤝 Contributing & Feedback
 This repository is intended for educational purposes. If you find a bug, have a suggestion, or want to provide feedback on the course, please open an issue in this repository. Your feedback is incredibly valuable!
 
 ---
 
-## 📜 License
+### 📜 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
 
