@@ -19,6 +19,6 @@ public class ProductVector
     [NotMapped]
     //[VectorStoreRecordVector(384, DistanceFunction.CosineSimilarity)]
     //[VectorStoreVector(1536, DistanceFunction.CosineSimilarity)]
-    [VectorStoreVector(Dimensions: 1536, DistanceFunction = DistanceFunction.CosineSimilarity)]
+    [VectorStoreVector(Dimensions: 768, DistanceFunction = DistanceFunction.CosineSimilarity)]
     public ReadOnlyMemory<float> Vector { get; set; }
 }

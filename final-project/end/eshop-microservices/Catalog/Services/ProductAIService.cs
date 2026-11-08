@@ -1,14 +1,17 @@
 ﻿using Microsoft.Extensions.AI;
 using Microsoft.Extensions.VectorData;
+using Qdrant.Client;
+using Qdrant.Client.Grpc;
 
 namespace Catalog.Services;
 
 public class ProductAIService(
     IChatClient chatClient,
-    IEmbeddingGenerator<string, Embedding<float>> embeddingGenerator,    
     VectorStoreCollection<ulong, ProductVector> productVectorCollection,    
-    CatalogDbContext dbContext
+    CatalogDbContext dbContext,
+    EmbeddingService embeddingService
     )
+
 {    
     public async Task<string> SupportAsync(string userQuery, CancellationToken cancellationToken = default)
     {        
@@ -55,21 +58,32 @@ public class ProductAIService(
         await productVectorCollection.EnsureCollectionExistsAsync();
 
         var products = await dbContext.Products.ToListAsync();
+        if (products.Count == 0)
+        {
+            return;
+        }
+        // await qdrantClient.CreateCollectionAsync( 
+        //     collectionName: "products",
+        //     vectorsConfig: new VectorParams
+        //     {
+        //         Size = 768,
+        //         Distance = Distance.Cosine
+        //     }
+        // );
         foreach (var product in products)
         {
             var productInfo = $"[{product.Name}] is a product that costs [{product.Price}] and is described as [{product.Description}]";
 
-            var productVector = new ProductVector
+            var embeddingVector = await embeddingService.GenerateEmbedding(product.Description);
+            await productVectorCollection.UpsertAsync( new ProductVector
             {
                 Id = (ulong)product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                Price = (double)product.Price,
+                Price = (float)product.Price,
                 ImageUrl = product.ImageUrl,
-                Vector = await embeddingGenerator.GenerateVectorAsync(productInfo)
-            };
-
-            await productVectorCollection.UpsertAsync(productVector);
+                Vector = embeddingVector
+            });
         }
     }
 
@@ -80,9 +94,9 @@ public class ProductAIService(
             await InitEmbeddingsAsync();
         }
 
-        var queryEmbedding = await embeddingGenerator.GenerateVectorAsync(query);
+        var queryEmbedding = await embeddingService.GenerateEmbedding(query);
 
-        var results = productVectorCollection.SearchAsync(queryEmbedding, 1);
+        var results = productVectorCollection.SearchAsync(queryEmbedding, 3);
 
         List<Product> products = [];
         await foreach (var resultItem in results)
