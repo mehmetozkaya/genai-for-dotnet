@@ -1,4 +1,5 @@
 using Microsoft.Extensions.AI;
+using OllamaSharp;
 using OpenAI;
 using System.ClientModel;
 
@@ -11,24 +12,19 @@ builder.AddNpgsqlDbContext<CatalogDbContext>(connectionName: "catalogdb");
 
 builder.Services.AddScoped<ProductAIService>();
 builder.Services.AddScoped<ProductService>();
-
 // Add AI Chat Client
-var credential = new ApiKeyCredential(builder.Configuration["GitHubModels:Token"] ?? throw new InvalidOperationException("Missing configuration: GitHubModels:Token."));
-var options = new OpenAIClientOptions()
-{
-    Endpoint = new Uri("https://models.github.ai/inference")
-};
+var endpoint = builder.Configuration["AI:Endpoint"] ?? throw new InvalidOperationException("Missing configuration: AI:Endpoint.");
+var apiKey = builder.Configuration["AI:ApiKey"] ?? throw new InvalidOperationException("Missing configuration: AI:ApiKey.");
+var chatModel = builder.Configuration["AI:ChatModel"] ?? throw new InvalidOperationException("Missing configuration: AI:ChatModel.");
+var embeddingModel = builder.Configuration["AI:EmbeddingModel"] ?? throw new InvalidOperationException("Missing configuration: AI:EmbeddingModel.");
 
-var openAiClient = new OpenAIClient(credential, options);
 
-var chatClient =
-    openAiClient.GetChatClient("openai/gpt-5-mini").AsIChatClient(); // if not worked use: gpt-4o-mini
+var chatClient = new OllamaApiClient(endpoint, chatModel);
+builder.Services.AddScoped<EmbeddingService>();
+builder.Services.AddScoped<ProductAIService>();
 
-var embeddingGenerator =
-    openAiClient.GetEmbeddingClient("openai/text-embedding-3-small").AsIEmbeddingGenerator();
 
 builder.Services.AddChatClient(chatClient);
-builder.Services.AddEmbeddingGenerator(embeddingGenerator);
 
 // Add Vector DB Search Operations
 builder.AddQdrantClient("vectordb");

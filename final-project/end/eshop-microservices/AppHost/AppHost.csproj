@@ -1,21 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Sdk Name="Aspire.AppHost.Sdk" Version="9.4.1" />
+  <Sdk Name="Aspire.AppHost.Sdk" Version="13.0.0" />
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>    
     <UserSecretsId>9f51c609-0365-40b5-8354-2c29415f2490</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.4.1" />
-	<PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.4.1" />
-	<PackageReference Include="Aspire.Hosting.Qdrant" Version="9.4.1" />
-	<PackageReference Include="Aspire.Hosting.Redis" Version="9.4.1" />
-	<PackageReference Include="Aspire.Hosting.SqlServer" Version="9.4.1" />
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.0" />
+	<PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.0" />
+	<PackageReference Include="Aspire.Hosting.Qdrant" Version="13.0.0" />
+	<PackageReference Include="Aspire.Hosting.Redis" Version="13.0.0" />
+	<PackageReference Include="Aspire.Hosting.SqlServer" Version="13.0.0" />
   </ItemGroup>
 
   <ItemGroup>
